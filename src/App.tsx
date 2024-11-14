@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/Homepage';
+import MyReviewsPage from './pages/Myreviewpage';
+import BookListPage from './pages/Booklistpage';
+import BookDetailPage from './pages/Bookdetailspage'
+import Loginpage from './pages/Loginpage';
+// import ProfilePage from './pages/Profilepage';
+import UserProfilePage from './pages/Userpage';
 import './App.css';
+// import axios from 'axios';
+import Layout from './components/Layout';
 
-function App() {
+
+const App:React.FC = () => {
+  // const fetchAPI = async () => {
+  //   const response = await axios.get("http://localhost:5000/");
+  //   console.log(response.data);
+  // };
+
+  // fetchAPI();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Routes>
+          <Route path='/login' element={<Loginpage />} />
+          <Route element={<Layout />}>
+            <Route path="/" element={<HomePage />} />
+            
+            <Route path="/reviews" element={<MyReviewsPage />} />
+            <Route path="/user" element={<UserProfilePage />} />
+            <Route path='/books' element={<BookListPage />} />
+            <Route path="/books/:id" element={<BookDetailPage />} />
+          </Route>
+        </Routes>
+      </Router>
+    </>    
   );
-}
-
+};
 export default App;
